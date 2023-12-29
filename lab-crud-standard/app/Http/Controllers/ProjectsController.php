@@ -3,15 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\ProjectsRepository;
+
 
 class ProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+     protected $projectRepository;
+    
+     public function __construct(ProjectsRepository $projectRepository){
+         $this->projectRepository = $projectRepository;
+     }
+    
     public function index()
     {
-        //
+    
+        $Projects = $this->projectRepository->index();
+        return view('Projects.index', compact('Projects'));
+
     }
 
     /**
@@ -35,7 +47,9 @@ class ProjectsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $project = $this->projectRepository->find($id);
+    
+        return view('Projects.show', compact('project'));
     }
 
     /**

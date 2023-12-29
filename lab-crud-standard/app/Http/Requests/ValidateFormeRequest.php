@@ -22,7 +22,7 @@ class ValidateFormeRequest extends FormRequest {
         return [
             'nom' => 'required|max:40',
             'projetId' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
         ];
      }
 
