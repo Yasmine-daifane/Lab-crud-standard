@@ -15,6 +15,6 @@ abstract class BaseRepository {
     abstract function model():string;
 
     public function index(){
-     return $this->model->paginate();
+     return $this->model->paginate(4);
     }
 }

@@ -19,6 +19,11 @@ use App\Http\Controllers\TasksController;
 //     return view('Projects.index');
 // });
 Route::get('/',[ProjectsController::class,'index'])->name('home');
+// Route::post('/',[ProjectsController::class,'create'])->name('create');
 Route::get('show/{Project}',[ProjectsController::class,'show'])->name('show');
-Route::put('update',[ProjectsController::class,'edit'])->name('edit');
-Route::delete('destroy',[ProjectsController::class,'destroy'])->name('destroy');
+// Route::put('update',[ProjectsController::class,'edit'])->name('edit');
+// Route::delete('destroy',[ProjectsController::class,'destroy'])->name('destroy');
+
+
+Route::resource('tasks', TasksController::class);
+Route::resource('projects', ProjectsController::class);

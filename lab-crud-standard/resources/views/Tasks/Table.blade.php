@@ -1,3 +1,19 @@
-<div>
-    <!-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison -->
+<div class="card-body table-responsive p-0">
+    <table class="table table-striped text-nowrap table-tasks ">
+        <thead>
+            <tr>
+                <th>Nom de projet</th>
+                <th>Description</th>
+            
+                <th>Action</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+
+            @include('tasks.search')
+
+        </tbody>
+        <input type="hidden" id='page' value="1">
+    </table>
 </div>

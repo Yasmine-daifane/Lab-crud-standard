@@ -1,17 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Repositories\TasksRepository;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
+
+    protected $TasksRepository;
+    
+    public function __construct(TasksRepository $TasksRepository){
+        $this->TasksRepository = $TasksRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $tasks = $this->TasksRepository->index();
+        dd($tasks);
+        return view("Tasks.index");
     }
 
     /**
