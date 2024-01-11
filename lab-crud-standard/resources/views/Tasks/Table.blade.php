@@ -2,9 +2,8 @@
     <table class="table table-striped text-nowrap table-tasks ">
         <thead>
             <tr>
-                <th>Nom de projet</th>
+                <th>Nom de tache</th>
                 <th>Description</th>
-            
                 <th>Action</th>
                 
             </tr>

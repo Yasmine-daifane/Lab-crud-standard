@@ -11,27 +11,26 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit Tâche </h3>
                         </div>
-                        <form action="{{ route('update', ['task' => $task->id]) }}" method="post">
+                        <form action="{{ route('tasks.update', ['task' => $task->id]) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="Projet">Projet<span class="text-danger">*</span></label>
-                                    <select id="Projet" name="project_id" class="custom-select">
-                                        @foreach ($Projects as $Project)
-                                            <option @selected($Project->id == $task->Project->id) value="{{ $Project->id }}"
-                                                name="{{ $Project->id }}">
-                                                {{ $Project->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label for="project_id">Projet<span class="text-danger">*</span></label>
+                                    <select id="project_id" name="projetId" class="custom-select">
+                            @foreach ($projects as $project)
+                                <option value="{{ $project->id }}" {{ $task->project_id == $project->id ? 'selected' : '' }}>
+                                    {{ $project->nom }}
+                                </option>
+                            @endforeach
+                        </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="Projet">Nom <span class="text-danger">*</span></label>
-                                    <input type="text" name="name"
-                                        class="form-control @error('name') border-danger @enderror"
-                                        value="{{ $task->name }}" id="name" placeholder="Enter le name de Tâche">
+                                    <input type="text" name="nom"
+                                        class="form-control @error('nom') border-danger @enderror"
+                                        value="{{ $task->nom }}" id="nom" placeholder="Enter le name de Tâche">
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -45,7 +44,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{ route('index') }}" class="btn btn-default">annuler</a>
+                                <a href="{{ route('tasks.index') }}" class="btn btn-default">annuler</a>
                                 <button type="submit" class="btn btn-primary">update</button>
                             </div>
                         </form>

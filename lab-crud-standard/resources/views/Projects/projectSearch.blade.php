@@ -5,12 +5,12 @@
         <td>{{ ($Project->description) }} 
 
         <td class="d-flex">
-            <a href="{{ route('show', ['Project' => $Project->id]) }}" class="btn btn-sm btn-default mx-2">
+            <a href="{{ route('projects.tasks',['projetId'=> $Project->id] )}}" class="btn btn-sm btn-default mx-2">
                 <i class="fa-regular fa-eye"></i>
             </a>
         
         </td>
-    </tr>
+    </tr> 
 @endforeach
 <tr>
     <td></td>

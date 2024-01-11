@@ -29,4 +29,12 @@ class ProjectsRepository extends BaseRepository
         return $this->model->findOrFail($id);
     }
 
+    public function searchProjects($searchValue, $perPage = 4)
+    {
+      return $this->model
+      ->where('nom', 'LIKE', '%' . $searchValue . '%')
+      ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
+      ->paginate($perPage);
+    }
+    
 }

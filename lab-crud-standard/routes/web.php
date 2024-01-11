@@ -20,10 +20,11 @@ use App\Http\Controllers\TasksController;
 // });
 Route::get('/',[ProjectsController::class,'index'])->name('home');
 // Route::post('/',[ProjectsController::class,'create'])->name('create');
-Route::get('show/{Project}',[ProjectsController::class,'show'])->name('show');
+
 // Route::put('update',[ProjectsController::class,'edit'])->name('edit');
 // Route::delete('destroy',[ProjectsController::class,'destroy'])->name('destroy');
 
+Route::get('projects/tasks/{projetId}',[TasksController::class,'index'])->name('projects.tasks');
 
 Route::resource('tasks', TasksController::class);
 Route::resource('projects', ProjectsController::class);

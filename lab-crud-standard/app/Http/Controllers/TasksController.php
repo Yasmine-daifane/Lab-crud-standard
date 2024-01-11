@@ -3,23 +3,39 @@
 namespace App\Http\Controllers;
 use App\Repositories\TasksRepository;
 use Illuminate\Http\Request;
+use App\Repositories\ProjectsRepository;
+
 
 class TasksController extends Controller
 {
 
     protected $TasksRepository;
-    
-    public function __construct(TasksRepository $TasksRepository){
+    protected $ProjectsRepository;
+    public function __construct(TasksRepository $TasksRepository, ProjectsRepository $ProjectsRepository ){
         $this->TasksRepository = $TasksRepository;
+        $this->ProjectsRepository = $ProjectsRepository;
     }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = $this->TasksRepository->index();
-        dd($tasks);
-        return view("Tasks.index");
+        $projects = $this->ProjectsRepository->index();
+    
+       
+        $projetId= $request ->projetId ;
+
+        if($projetId) {
+            $project = $this->ProjectsRepository->find($projetId);
+            $Tasks = $this->TasksRepository->getTaskbyprojetId($projetId);
+            return view("Tasks.index",Compact('Tasks','projects'));
+            // dd($tasks);
+        }
+        $Tasks = $this->TasksRepository->index();
+
+    //    dd($project);
+        return view("Tasks.index",Compact('Tasks','projects'));
+
     }
 
     /**
@@ -27,7 +43,8 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
+        $projects = $this->ProjectsRepository->index(); 
+        return view('tasks.create',Compact('projects'));
     }
 
     /**
@@ -35,8 +52,22 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $validatedata = $request->validate([
+    
+            'nom' =>'required',
+            'description'=>'nullable',
+            'projetId'=>'required ',
+          
+          
+        ]);
+        // dd($validatedata);
+
+        $this->TasksRepository->create($validatedata);
+        return redirect()->route('projects.tasks',['projetId'=> $request->projetId])->with('success',"tasks succefuly");
+
     }
+
 
     /**
      * Display the specified resource.
@@ -51,7 +82,11 @@ class TasksController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $projects = $this->ProjectsRepository->index(); 
+        $task = $this->TasksRepository->find($id);
+      return view('Tasks.edit',compact('task','projects'));
+
     }
 
     /**
@@ -59,7 +94,17 @@ class TasksController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedata = $request->validate([
+    
+            'nom' =>'required',
+            'description'=>'nullable',
+            'projetId'=>'required ',
+          
+          
+        ]);
+        $this->TasksRepository->update($validatedata,$id);
+        return redirect()->route('projects.tasks',['projetId'=> $request->projetId])->with('success',"tasks update succefuly");
+
     }
 
     /**
@@ -67,6 +112,7 @@ class TasksController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->TasksRepository->delete($id);
+        return redirect()->back()->with('success', "tasks destroye successfully");
     }
 }

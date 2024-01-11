@@ -18,13 +18,20 @@ class ProjectsController extends Controller
          $this->projectRepository = $projectRepository;
      }
     
-    public function index()
-    {
-    
+     public function index(Request $request){
         $Projects = $this->projectRepository->index();
-        return view('Projects.index', compact('Projects'));
 
+        if($request->ajax()){
+            $seachQuery = $request->get('searchValue');
+            $seachQuery = str_replace(' ','%', $seachQuery);
+            $projects = $this->projectRepository->searchProjects($seachQuery);
+
+            return view('projects.search' , compact('projects'))->render();
+        }
+
+        return view('Projects.index' , compact('Projects'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +55,11 @@ class ProjectsController extends Controller
     public function show(string $id)
     {
         $project = $this->projectRepository->find($id);
-    
+         
+        
+        $id = $projects->id;
+        dd($id);
+
         return view('Projects.show', compact('project'));
     }
 

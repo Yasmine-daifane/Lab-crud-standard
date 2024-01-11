@@ -32,32 +32,7 @@
 
   
 
-    {{-- <script>
-        $(document).ready(function() {
-            $(document).on('keyup', '#table_search', function(e) {
-                e.preventDefault();
-                // let project = document.getElementById('project').value;
-                let search = $(this).val();
-                console.log(search);
-                let page = $('.pagination').find('.active').text(); // Get the current active page
-                $.ajax({
-                    url: "{{ route('search') }}",
-                    method: 'GET',
-                    data: {
-                        search: search,
-                        // project: project,
-                    },
-                    success: function(data) {
-                        $('.table-tasks').html(data.table);
-                        $('.pagination').html(data.pagination);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script> --}}
+   
 
 </body>
 

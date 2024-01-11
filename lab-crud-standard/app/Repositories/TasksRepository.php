@@ -29,5 +29,9 @@ class TasksRepository extends BaseRepository
     {
         return $this->model->findOrFail($id);
     }
+   public function  getTaskbyprojetId($projetId){
+    return $this->model->where('projetId', $projetId)->paginate(4);
+     
+   }
 
 }
