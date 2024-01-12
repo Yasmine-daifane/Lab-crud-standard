@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Repositories\TasksRepository;
 use Illuminate\Http\Request;
 use App\Repositories\ProjectsRepository;
-
+use App\http\Requests\StoreTaskRequest ;
+use App\Http\Requests\UpdateTaskRequest;
 
 class TasksController extends Controller
 {
@@ -50,22 +51,13 @@ class TasksController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-       
-        $validatedata = $request->validate([
+        $validatedData = $request->validated();
     
-            'nom' =>'required',
-            'description'=>'nullable',
-            'projetId'=>'required ',
-          
-          
-        ]);
-        // dd($validatedata);
-
-        $this->TasksRepository->create($validatedata);
-        return redirect()->route('projects.tasks',['projetId'=> $request->projetId])->with('success',"tasks succefuly");
-
+        $this->TasksRepository->create($validatedData);
+    
+        return redirect()->route('projects.tasks', ['projetId' => $request->projetId])->with('success', "Task successfully created");
     }
 
 
@@ -92,16 +84,9 @@ class TasksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTaskRequest $request, string $id)
     {
-        $validatedata = $request->validate([
-    
-            'nom' =>'required',
-            'description'=>'nullable',
-            'projetId'=>'required ',
-          
-          
-        ]);
+        $validatedata = $request->validated();
         $this->TasksRepository->update($validatedata,$id);
         return redirect()->route('projects.tasks',['projetId'=> $request->projetId])->with('success',"tasks update succefuly");
 

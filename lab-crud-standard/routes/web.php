@@ -28,3 +28,4 @@ Route::get('projects/tasks/{projetId}',[TasksController::class,'index'])->name('
 
 Route::resource('tasks', TasksController::class);
 Route::resource('projects', ProjectsController::class);
+

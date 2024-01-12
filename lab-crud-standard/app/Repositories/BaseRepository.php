@@ -12,12 +12,18 @@ abstract class BaseRepository {
         $this->model = $model;
     }
 
+
+
+
+  
   public function find($id) {
 
      return $this->model->findOrFail($id);
 
     } 
 
+
+  
     abstract function getFieldData():array;
     abstract function model():string;
 
@@ -42,8 +48,6 @@ public function update(array $validatedData, $id) {
     return $data->update($validatedData);
 
   }
-
-
 
   public function delete($id) {
     

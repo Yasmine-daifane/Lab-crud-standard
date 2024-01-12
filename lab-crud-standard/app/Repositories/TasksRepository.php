@@ -21,17 +21,11 @@ class TasksRepository extends BaseRepository
     public function model():string {
         return Task::class;
     }
-    public function all()
-    {
-        return $this->model->all();
-    }
-    public function find($id)
-    {
-        return $this->model->findOrFail($id);
-    }
+ 
+
    public function  getTaskbyprojetId($projetId){
     return $this->model->where('projetId', $projetId)->paginate(4);
      
    }
-
+ 
 }

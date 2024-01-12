@@ -20,14 +20,7 @@ class ProjectsRepository extends BaseRepository
     public function model():string {
         return Project::class;
     }
-    public function all()
-    {
-        return $this->model->all();
-    }
-    public function find($id)
-    {
-        return $this->model->findOrFail($id);
-    }
+  
 
     public function searchProjects($searchValue, $perPage = 4)
     {

@@ -54,7 +54,7 @@ class ProjectsController extends Controller
      */
     public function show(string $id)
     {
-        $project = $this->projectRepository->find($id);
+        $projects = $this->projectRepository->find($id);
          
         
         $id = $projects->id;
