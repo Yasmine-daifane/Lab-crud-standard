@@ -21,6 +21,14 @@ class TasksController extends Controller
      */
     public function index(Request $request)
     {
+
+        if ($request->ajax()) {
+            $searchQuery = $request->get('searchValue');
+            $searchQuery = str_replace(' ', '%', $searchQuery);
+            $Tasks = $this->TasksRepository->searchTasks($searchQuery);
+
+            return view('tasks.search', compact('Tasks'))->render();
+        } 
         $projects = $this->ProjectsRepository->index();
     
        

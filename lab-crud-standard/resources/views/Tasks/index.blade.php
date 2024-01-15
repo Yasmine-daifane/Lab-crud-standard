@@ -65,54 +65,49 @@
         </div>
     </section>
 
-    {{-- script search by ajax --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            function fetchData(page, searchTaskValue, selectProjrctValue) {
+            function fetchData(page, searchValue, projetId) {
+                // Choose either requestUrl or requestUr2
+                var requestUrl = "{{ url('projects') }}/tasks/" + projetId +"?page=" + page + "&searchValue=" + searchValue;
+
+                console.log("Request URL:", requestUrl);
+
                 $.ajax({
-                    url: 'projects/?page=' + page + '&searchTaskValue=' + searchTaskValue + '&selectProjrctValue=' +
-                        selectProjrctValue,
+                    url: requestUrl, // Choose either requestUrl or requestUr2
                     success: function(data) {
+                        // console.log(1);
+                        console.log(data);
                         $('tbody').html('');
                         $('tbody').html(data);
-                        console.log(data);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX Error:", textStatus, errorThrown);
                     }
                 });
-                console.log(page);
-                console.log(searchTaskValue);
-                console.log(selectProjrctValue);
             }
 
-            $('body').on('click', '.pagination a', function(e) {
+            $('body').on('click', '.pagination a', function(event) {
+                event.preventDefault();
 
-                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                var searchValue = $('#search-input').val();
+                var projectId = $('#projectId').val();
 
-                let page = $(this).attr('href').split('page=')[1];
-                let searchTaskValue = $('#search-input').val();
-                let selectProjrctValue = $('#filterSelectProjrctValue').val();
-              
-                fetchData(page, searchTaskValue, selectProjrctValue);
-
+                fetchData(page, searchValue, 1);
             });
 
             $('body').on('keyup', '#search-input', function() {
-                let page = $('#page').val();
-                let searchTaskValue = $('#search-input').val();
-                console.log(searchTaskValue);
-                let selectProjrctValue = $('#filterSelectProjrctValue').val();
 
-                fetchData(page, searchTaskValue, selectProjrctValue);
+                var page = 1;
+                var searchValue = $('#search-input').val();
+                var projectId = $('#projectId').val();
 
+                console.log(searchValue);
+                fetchData(page, searchValue, 1);
             });
-
-            $('#filterSelectProjrctValue').on('change', function() {
-                let page = $('#page').val();
-                let searchTaskValue = $('#search-input').val();
-                let selectProjrctValue = $(this).val();
-                fetchData(page, searchTaskValue, selectProjrctValue);
-            });
-
         });
     </script>
 
