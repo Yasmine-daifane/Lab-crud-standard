@@ -75,9 +75,12 @@ class TasksController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($task)
     {
-        //
+        $task = $this->TasksRepository->find($task);
+        $project = $this->ProjectsRepository->find($task->projetId);
+
+        return view('tasks.show', compact('task', 'project'));
     }
 
     /**

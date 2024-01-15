@@ -1,8 +1,7 @@
 @foreach ($Tasks as $Task)
     <tr>
         <td>{{ $Task->nom }}</td>
-        <td>{{ ($Task->description) }} <a href="{{ route('projects.tasks', $Task->id) }}"></a></td>
-
+        <td>{{ Str::limit($Task->description, 30) }}</td>        <td>
         <td class="d-flex">
             <a href="{{ route('tasks.edit', ['task' => $Task->id]) }}" class="btn btn-sm btn-default mx-2">
                 <i class="fa-solid fa-pen-to-square"></i>
@@ -11,7 +10,9 @@
                 <button type="submit" class="btn btn-sm btn-danger"  onclick="deleteTask({{$Task->id}})" data-toggle="modal" data-target="#deleteTask">
                     <i class="fa-solid fa-trash"></i></button>
         
-
+                    <a href="{{ route('tasks.show',['task'=> $Task->id] )}}" class="btn btn-sm btn-default mx-2">
+                        <i class="fa-regular fa-eye"></i>
+                    </a>
             
         </td>
     </tr>

@@ -4,7 +4,7 @@
             <tr>
                 <th>Nom de projet</th>
                 <th>Description</th>
-                <th>Action</th>
+                <th>view tache </th>
                 
             </tr>
         </thead>
