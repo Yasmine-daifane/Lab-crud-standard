@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Nom de tache</th>
-                <th style="word-wrap: break-word;">Description</th>
+                <th >Description</th>
                 <th>Action</th>
             </tr>
         </thead>
