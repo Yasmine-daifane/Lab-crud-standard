@@ -21,12 +21,12 @@ class ProjectsController extends Controller
      public function index(Request $request){
         $Projects = $this->projectRepository->index();
 
-        if($request->ajax()){
-            $seachQuery = $request->get('searchValue');
-            $seachQuery = str_replace(' ','%', $seachQuery);
-            $projects = $this->projectRepository->searchProjects($seachQuery);
-
-            return view('projects.search' , compact('projects'))->render();
+        if ($request->ajax()) {
+            $searchQuery = $request->get('searchValue');
+            $searchQuery = str_replace(' ', '%', $searchQuery);
+            $Projects = $this->projectRepository->searchProjects($searchQuery);
+          
+            return view('Projects.projectSearch', compact('Projects'));
         }
 
         return view('Projects.index' , compact('Projects'));
