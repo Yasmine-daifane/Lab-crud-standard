@@ -115,4 +115,12 @@
 
         });
     </script>
+
+
+<script>
+    function deleteTask(taskId) {
+        document.getElementById('deleteForm').action = "{{ route('tasks.destroy', ':taskId') }}".replace(':taskId',
+            taskId);
+    }
+</script>
 @endsection
