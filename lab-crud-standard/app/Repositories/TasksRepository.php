@@ -30,10 +30,17 @@ class TasksRepository extends BaseRepository
 
    public function searchTasks($searchTask)
     {
-        return $this->model->where(function ($query) use ($searchTask) {
+        $get_data =  $this->model->where(function ($query) use ($searchTask) {
             $query->where('nom', 'like', '%' . $searchTask . '%')
                 ->orWhere('description', 'like', '%' . $searchTask . '%');
-        })->paginate(4);
+        });
+
+     
+
+      
+        return $get_data->paginate(4);
+
+    
     }
  
 }

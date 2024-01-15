@@ -35,17 +35,7 @@
                             <div class="row d-flex justify-content-between">
                                 <div class="col-4">
                                     <div class="input-group">
-                                        <label class="input-group-text" for="filterSelectProjrctValue"><i
-                                                class="fas fa-filter"></i></label>
-                                        <select class="form-select form-control" id="filterSelectProjrctValue"
-                                            aria-label="Filter Select">
-                                            <option value="Filtrer par projet">Filtrer par projet</option>
-                                            @foreach ($projects as $Project)
-                                                <option value="{{ $Project->id }}" name="{{ $Project->id }}">
-                                                    {{ $Project->nom }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                       
                                     </div>
                                 </div>
                                 <div class="input-group col-md-3">
@@ -76,12 +66,17 @@
                 console.log("Request URL:", requestUrl);
 
                 $.ajax({
-                    url: requestUrl, // Choose either requestUrl or requestUr2
+                    url: requestUrl, 
                     success: function(data) {
-                        // console.log(1);
-                        console.log(data);
+
+                        if (data == 'false') {
+                        // No results found, display a message
+                        $('tbody').html('<tr><td colspan="4">No results found</td></tr>');
+                    } else {
                         $('tbody').html('');
                         $('tbody').html(data);
+                    }
+            
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX Error:", textStatus, errorThrown);

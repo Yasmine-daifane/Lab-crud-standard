@@ -16,7 +16,7 @@
 
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title"> <i class="nav-icon fas fa-table"></i> Modifier un Projet</h3>
+                                    <h3 class="card-title"> <i class="nav-icon fas fa-table"></i> Modifier une taches</h3>
                                 </div>
                                @include('tasks.form')
                             </div>
